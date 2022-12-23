@@ -21,6 +21,10 @@ This code includes
 ```
     https://zenodo.org/record/7476285/files/pretrained.zip?download=1
 ```
+* STR LMDB Real Test Datasets
+```
+    https://zenodo.org/record/7477487/files/datasets.zip?download=1
+```
 
 Note that you can run ```script/dlbroden.sh``` to download Broden dataset with images in all three resolution (227x227,224x224,384x384), or run ```script/dlzoo.sh``` to download more CNN models. AlexNet models work with 227x227 image input, while VGG, ResNet, GoogLeNet works with 224x224 image input.
 
