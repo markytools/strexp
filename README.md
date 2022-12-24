@@ -21,7 +21,7 @@ This code includes
 ```
     https://zenodo.org/record/7476285/files/pretrained.zip?download=1
 ```
-* STR LMDB Real Test Datasets and their segmentations
+* STR LMDB Real Test Datasets and their segmentations. After unzipping, simply put the "datasets/" folder into the cloned strexp directory.
 ```
     https://zenodo.org/record/7478796/files/datasets.zip?download=1
 ```
