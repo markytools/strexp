@@ -26,24 +26,48 @@ This code includes
     https://zenodo.org/record/7478796/files/datasets.zip?download=1
 ```
 
-Note that you can run ```script/dlbroden.sh``` to download Broden dataset with images in all three resolution (227x227,224x224,384x384), or run ```script/dlzoo.sh``` to download more CNN models. AlexNet models work with 227x227 image input, while VGG, ResNet, GoogLeNet works with 224x224 image input.
+## STR Model Evaluations
+* Before running anything, you need to edit the file ```settings.py```. Set the STR model (vitstr, parseq, srn, abinet, trba, matrn), the segmentation directory, and the STR real test dataset name (IIIT5k_3000, SVT, IC03_860, IC03_867, IC13_857, IC13_1015, IC15_1811, IC15_2077, SVTP, CUTE80).
 
-## Run in Caffe
-* Run Network Dissection in Caffe to probe the conv5 layer of the AlexNet trained on Places365. Results will be saved to ```dissection/caffe_reference_model_places365/```, in which ```html``` contains the visualization of all the units in a html page and ```conv5-result.csv``` contains the raw predicted labels for each unit. The code takes about 40 mintues to run, and it will generate about 1.5GB intermediate results (mmap) for one layer, which you could delete after the code finishes running.
 
+* Run STRExp on VITSTR: 
 ```
-    script/rundissect.sh --model caffe_reference_places365 --layers "conv5" --dataset dataset/broden1_227 --resolution 227
-```
-
-* Run Network Dissection to compare three layers of AlexNet trained on ImageNet. Results will be saved to ```dissection/caffe_reference_model_imagenet/```. 
-
-```
-    script/rundissect.sh --model caffe_reference_imagenet --layers "conv3 conv4 conv5" --dataset dataset/broden1_227 --resolution 227
+CUDA_VISIBLE_DEVICES=0 python captum_improve_vitstr.py --eval_data datasets/data_lmdb_release/evaluation \
+--benchmark_all_eval --Transformation None --FeatureExtraction None --SequenceModeling None --Prediction None --Transformer --sensitive \
+--data_filtering_off  --imgH 224 --imgW 224 --TransformerModel=vitstr_base_patch16_224 \
+--saved_model pretrained/vitstr_base_patch16_224_aug.pth --batch_size=1 --workers=0 --scorer mean --blackbg
 ```
 
-* If you need to regenerate the Broden dataset from scratch, you can run ```script/makebroden.sh```. The script will download the pieces and merge them.
+* Run STRExp on PARSeq:
+```
+CUDA_VISIBLE_DEVICES=0 python captum_improve_parseq.py --eval_data datasets/data_lmdb_release/evaluation \
+--benchmark_all_eval --Transformation None --FeatureExtraction None --SequenceModeling None --Prediction None --Transformer --sensitive \
+--data_filtering_off  --imgH 32 --imgW 128 --TransformerModel=vitstr_base_patch16_224 --batch_size=1 --workers=0 --scorer mean --blackbg --rgb
+```
 
-* Network dissection depends on scipy as well as pycaffe. [Details on installing pycaffe can be found here](http://caffe.berkeleyvision.org/tutorial/interfaces.html#python).
+* Run STRExp on TRBA:
+```
+CUDA_VISIBLE_DEVICES=0 python captum_improve_trba.py --eval_data datasets/data_lmdb_release/evaluation --benchmark_all_eval \
+--Transformation TPS --FeatureExtraction ResNet --SequenceModeling BiLSTM --Prediction Attn --batch_size 1 --workers=0 --data_filtering_off \
+--saved_model pretrained/trba.pth --confidence_mode 0 --scorer mean --blackbg --imgH 32 --imgW 100
+```
+
+* Run STRExp on SRN:
+```
+CUDA_VISIBLE_DEVICES=0 python captum_improve_srn.py --eval_data datasets/data_lmdb_release/evaluation \
+--saved_model pretrained/srn.pth --batch_size=1 --workers=0 --imgH 32 --imgW 100 --scorer mean
+```
+
+* Run STRExp on ABINET (change also the dataset.test.roots dataset name in ```configs\train_abinet.yaml``` to settings.py TARGET_DATASET):
+```
+CUDA_VISIBLE_DEVICES=0 python captum_improve_abinet.py --config=configs/train_abinet.yaml --phase test --image_only --scorer mean --blackbg \
+--checkpoint pretrained/abinet.pth --imgH 32 --imgW 128 --rgb
+```
+
+* Run STRExp on MATRN (change also the dataset.test.roots dataset name in ```configs\train_matrn.yaml``` to settings.py TARGET_DATASET):
+```
+CUDA_VISIBLE_DEVICES=0 python captum_improve_matrn.py --imgH 32 --imgW 128 --checkpoint=pretrained/matrn.pth --scorer mean --rgb
+```
 
 ## Run in PyTorch
 
