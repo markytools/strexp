@@ -1,6 +1,6 @@
 import os
 import pickle
-from captum_improve import rankedAttributionsBySegm
+from captum_improve_vitstr import rankedAttributionsBySegm
 import matplotlib.pyplot as plt
 from skimage.color import gray2rgb
 from captum.attr._utils.visualization import visualize_image_attr

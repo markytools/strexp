@@ -14,7 +14,7 @@ dataset:
     batch_size: 384
   }
   test: {
-    roots: ['/home/goo/str/datasets/data_lmdb_release/evaluation/IC15_2077'],
+    roots: ['datasets/data_lmdb_release/evaluation/SVTP'],
     batch_size: 1
   }
   valid: {

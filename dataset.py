@@ -38,9 +38,9 @@ class Batch_Balanced_Dataset(object):
         For example, when select_data is "MJ-ST" and batch_ratio is "0.5-0.5",
         the 50% of the batch is filled with MJ and the other 50% of the batch is filled with ST.
         """
-        if not os.path.exists(f'/media/markytools/NewVol2TB/STR/STRVITmodels/saved_models/{opt.exp_name}/'):
-            os.makedirs(f'/media/markytools/NewVol2TB/STR/STRVITmodels/saved_models/{opt.exp_name}/')
-        log = open(f'/media/markytools/NewVol2TB/STR/STRVITmodels/saved_models/{opt.exp_name}/log_dataset.txt', 'a')
+        if not os.path.exists(f'./saved_models/{opt.exp_name}/'):
+            os.makedirs(f'./saved_models/{opt.exp_name}/')
+        log = open(f'./saved_models/{opt.exp_name}/log_dataset.txt', 'a')
         dashed_line = '-' * 80
         print(dashed_line)
         log.write(dashed_line + '\n')

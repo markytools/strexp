@@ -20,6 +20,7 @@
 **/tmp/*
 *.sh
 **/__pycache__
+workdir/
 .remote-sync.json
 *.png
 pretrained/

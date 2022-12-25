@@ -24,10 +24,9 @@ import pickle
 from train_shap_corr import getPredAndConf
 import re
 from captum_test import acquire_average_auc, acquireListOfAveAUC, saveAttrData
-from netdissect import nethook
 import copy
 from model_srn import Model
-from captum_improve import rankedAttributionsBySegm
+from captum_improve_vitstr import rankedAttributionsBySegm
 from matplotlib import pyplot as plt
 from captum.attr._utils.visualization import visualize_image_attr
 
@@ -113,50 +112,6 @@ def outputSegmOnly(opt):
             with open(outputPickleFile, 'wb') as f:
                 pickle.dump(imgDataDict, f)
 
-### Create segmentation formats for the synthetic str dataset
-def outputSegmOnly_synth(opt):
-    ### targetDataset - one dataset only, SVTP-645, CUTE80-288images
-    targetDataset = "synthstr_char10" # ['IIIT5k_3000', 'SVT', 'IC03_860', 'IC03_867', 'IC13_857', 'IC13_1015', 'IC15_1811', 'IC15_2077', 'SVTP', 'CUTE80']
-    targetHeight = 224 # for trba (32,100), vitstr (224, 224)
-    targetWidth = 224
-    segmRootDir = "/media/markytools/OrigDocs/markytools/Documents/MSEEThesis/STR/datasets/segmentations/{}X{}/{}/".format(targetHeight, targetWidth, targetDataset)
-
-    if not os.path.exists(segmRootDir):
-        os.makedirs(segmRootDir)
-
-    opt.eval = True
-    ### Only IIIT5k_3000
-    # eval_data_list = [targetDataset]
-    target_output_orig = opt.outputOrigDir
-
-    ### Taken from LIME
-    segmentation_fn = SegmentationAlgorithm('quickshift', kernel_size=4,
-                                            max_dist=200, ratio=0.2,
-                                            random_seed=random.randint(0, 1000))
-    # for eval_data in eval_data_list:
-    eval_data_path = opt.eval_data
-    AlignCollate_evaluation = AlignCollate(imgH=targetHeight, imgW=targetWidth, keep_ratio_with_pad=opt.PAD)
-    eval_data, eval_data_log = hierarchical_dataset(root=eval_data_path, opt=opt, targetDir=target_output_orig)
-    evaluation_loader = torch.utils.data.DataLoader(
-        eval_data, batch_size=1,
-        shuffle=False,
-        num_workers=int(opt.workers),
-        collate_fn=AlignCollate_evaluation, pin_memory=True)
-    for i, (image_tensors, labels) in enumerate(evaluation_loader):
-        image_tensors = ((image_tensors + 1.0) / 2.0) * 255.0
-        imgDataDict = {}
-        img_numpy = image_tensors.cpu().detach().numpy()[0] ### Need to set batch size to 1 only
-        if img_numpy.shape[0] == 1:
-            img_numpy = gray2rgb(img_numpy[0])
-        # print("img_numpy shape: ", img_numpy.shape) # (32,100,3)
-        segmOutput = segmentation_fn(img_numpy)
-        # print("segmOutput unique: ", len(np.unique(segmOutput)))
-        imgDataDict['segdata'] = segmOutput
-        imgDataDict['label'] = labels[0]
-        outputPickleFile = segmRootDir + "{}.pkl".format(i)
-        with open(outputPickleFile, 'wb') as f:
-            pickle.dump(imgDataDict, f)
-
 def acquireSelectivityHit(origImg, attributions, segmentations, model, converter, labels, scoring):
     # print("segmentations unique len: ", np.unique(segmentations))
     aveSegmentations, sortedDict = averageSegmentsOut(attributions[0,0], segmentations)
@@ -196,9 +151,7 @@ def acquireSelectivityHit(origImg, attributions, segmentations, model, converter
 ### Once you have the selectivity_eval_results.pkl file,
 def acquire_selectivity_auc(opt, pkl_filename=None):
     if pkl_filename is None:
-        # pkl_filename = "/home/markytools/Documents/MSEEThesis/STR/deep-text-recognition-benchmark-deepshap/selectivity_eval_results.pkl" # TRBA
         pkl_filename = "/home/goo/str/str_vit_dataexplain_lambda/metrics_sensitivity_eval_results_CUTE80.pkl" # VITSTR
-        # pkl_filename = "/home/markytools/Documents/MSEEThesis/STR/ABINet/selectivity_eval_results.pkl" # ABINET
     accKeys = []
 
     with open(pkl_filename, 'rb') as f:
@@ -220,11 +173,11 @@ def acquire_selectivity_auc(opt, pkl_filename=None):
 def acquireSingleCharAttrAve(opt):
     ### targetDataset - one dataset only, CUTE80 has 288 samples
     # 'IIIT5k_3000', 'SVT', 'IC03_860', 'IC03_867', 'IC13_857', 'IC13_1015', 'IC15_1811', 'IC15_2077', 'SVTP', 'CUTE80'
-    targetDataset = "CUTE80"
-    segmRootDir = "/home/goo/str/datasets/segmentations/{}X{}/{}/".format(opt.imgH, opt.imgW, targetDataset)
-    outputSelectivityPkl = "shapley_singlechar_ave_{}_{}.pkl".format(settings.MODEL, targetDataset)
+    targetDataset = settings.TARGET_DATASET
+    segmRootDir = "{}/{}X{}/{}/".format(settings.SEGM_DIR, opt.imgH, opt.imgW, targetDataset)
+    outputSelectivityPkl = "strexp_ave_{}_{}.pkl".format(settings.MODEL, targetDataset)
     outputDir = "./attributionImgs/{}/{}/".format(settings.MODEL, targetDataset)
-    attrOutputDir = "/data/goo/strattr/attributionData/{}/{}/".format(settings.MODEL, targetDataset)
+    attrOutputDir = "./attributionData/{}/{}/".format(settings.MODEL, targetDataset)
     ### Set only one below to True to have enough GPU
     acquireSelectivity = True
     acquireInfidelity = False

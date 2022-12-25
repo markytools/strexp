@@ -31,7 +31,7 @@ import settings
 import sys
 import copy
 from captum_test import acquire_average_auc, saveAttrData
-from captum_improve import rankedAttributionsBySegm
+from captum_improve_vitstr import rankedAttributionsBySegm
 from matplotlib import pyplot as plt
 from captum.attr._utils.visualization import visualize_image_attr
 
@@ -196,11 +196,11 @@ def acquireSelectivityHit(origImg, attributions, segmentations, model, converter
 
 def main(opt):
     # 'IIIT5k_3000', 'SVT', 'IC03_860', 'IC03_867', 'IC13_857', 'IC13_1015', 'IC15_1811', 'IC15_2077', 'SVTP', 'CUTE80'
-    datasetName = "SVTP"
-    custom_segm_dataroot = "/home/goo/str/datasets/segmentations/{}X{}/{}/".format(opt.imgH, opt.imgW, datasetName)
-    outputSelectivityPkl = "shapley_singlechar_ave_{}_{}.pkl".format(settings.MODEL, datasetName)
+    datasetName = settings.TARGET_DATASET
+    custom_segm_dataroot = "{}/{}X{}/{}/".format(settings.SEGM_DIR, opt.imgH, opt.imgW, datasetName)
+    outputSelectivityPkl = "strexp_ave_{}_{}.pkl".format(settings.MODEL, datasetName)
     outputDir = "./attributionImgs/{}/{}/".format(settings.MODEL, datasetName)
-    attrOutputDir = "/data/goo/strattr/attributionData/{}/{}/".format(settings.MODEL, datasetName)
+    attrOutputDir = "./attributionData/{}/{}/".format(settings.MODEL, datasetName)
     acquireSelectivity = True
     acquireInfidelity = False
     acquireSensitivity = False ### GPU error

@@ -203,14 +203,12 @@ def load(model, file, device=None, strict=True):
 def main(config):
     height = config.imgH
     width = config.imgW
-    # custom_segm_dataroot = "/media/markytools/OrigDocs/markytools/Documents/MSEE"\
-    # "Thesis/STR/datasets/data_lmdb_segmentations/{}X{}/{}/".format(height, width, datasetName)
     # 'IIIT5k_3000', 'SVT', 'IC03_860', 'IC03_867', 'IC13_857', 'IC13_1015', 'IC15_1811', 'IC15_2077', 'SVTP', 'CUTE80'
-    targetDataset = "IC15_2077" # Change also the configs/train_matrn.yaml test.roots test folder
-    segmRootDir = "/home/goo/str/datasets/segmentations/{}X{}/{}/".format(height, width, targetDataset)
-    outputSelectivityPkl = "shapley_singlechar_ave_{}_{}.pkl".format(settings.MODEL, targetDataset)
+    targetDataset = settings.TARGET_DATASET # Change also the configs/train_matrn.yaml test.roots test folder
+    segmRootDir = "{}/{}X{}/{}/".format(settings.SEGM_DIR, height, width, targetDataset)
+    outputSelectivityPkl = "strexp_ave_{}_{}.pkl".format(settings.MODEL, targetDataset)
     outputDir = "./attributionImgs/{}/{}/".format(settings.MODEL, targetDataset)
-    attrOutputDir = "/data/goo/strattr/attributionData/{}/{}/".format(settings.MODEL, targetDataset)
+    attrOutputDir = "./attributionData/{}/{}/".format(settings.MODEL, targetDataset)
     resumePkl = "" # Use to resume when session destroyed. Set to "" to disable
     resumePkl2 = "" # To enable global resume 2nd part. Set to "" to disable
     acquireSelectivity = True

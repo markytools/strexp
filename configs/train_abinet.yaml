@@ -7,14 +7,14 @@ global:
 
 dataset:
   train: {
-    roots: ['/media/markytools/OrigDocs/markytools/Documents/MSEEThesis/STR/datasets/data_lmdb_release/training/MJ/MJ_train/',
-            '/media/markytools/OrigDocs/markytools/Documents/MSEEThesis/STR/datasets/data_lmdb_release/training/MJ/MJ_test/',
-            '/media/markytools/OrigDocs/markytools/Documents/MSEEThesis/STR/datasets/data_lmdb_release/training/MJ/MJ_valid/',
-            '/media/markytools/OrigDocs/markytools/Documents/MSEEThesis/STR/datasets/data_lmdb_release/training/ST'],
+    roots: ['datasets/data_lmdb_release/training/MJ/MJ_train/',
+            'datasets/data_lmdb_release/training/MJ/MJ_test/',
+            'datasets/data_lmdb_release/training/MJ/MJ_valid/',
+            'datasets/data_lmdb_release/training/ST'],
     batch_size: 384
   }
   test: {
-    roots: ['/home/goo/str/datasets/data_lmdb_release/evaluation/IIIT5k_3000'],
+    roots: ['datasets/data_lmdb_release/evaluation/SVTP'],
     batch_size: 1
   }
   data_aug: False
