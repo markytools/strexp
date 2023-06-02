@@ -28,6 +28,8 @@ This code includes
 
 ## STR Model Evaluations
 * Before running anything, you need to edit the file ```settings.py```. Set the STR model (vitstr, parseq, srn, abinet, trba, matrn), the segmentation directory, and the STR real test dataset name (IIIT5k_3000, SVT, IC03_860, IC03_867, IC13_857, IC13_1015, IC15_1811, IC15_2077, SVTP, CUTE80).
+* To run/evaluate (vitstr, srn, abinet, trba, matrn), pip install timm==0.4.5
+* To run/evaluate (parseq), pip install timm==0.6.7
 
 
 * Run STRExp on VITSTR: 
