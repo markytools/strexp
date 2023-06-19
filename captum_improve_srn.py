@@ -151,7 +151,7 @@ def acquireSelectivityHit(origImg, attributions, segmentations, model, converter
 ### Once you have the selectivity_eval_results.pkl file,
 def acquire_selectivity_auc(opt, pkl_filename=None):
     if pkl_filename is None:
-        pkl_filename = "/home/goo/str/str_vit_dataexplain_lambda/metrics_sensitivity_eval_results_CUTE80.pkl" # VITSTR
+        pkl_filename = "metrics_sensitivity_eval_results_CUTE80.pkl" # VITSTR
     accKeys = []
 
     with open(pkl_filename, 'rb') as f:

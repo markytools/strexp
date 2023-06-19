@@ -145,7 +145,7 @@ def acquireSelectivityHit(origImg, attributions, segmentations, model, converter
 ### Once you have the selectivity_eval_results.pkl file,
 def acquire_selectivity_auc(opt, pkl_filename=None):
     if pkl_filename is None:
-        pkl_filename = "/home/goo/str/str_vit_dataexplain_lambda/metrics_sensitivity_eval_results_CUTE80.pkl" # VITSTR
+        pkl_filename = "metrics_sensitivity_eval_results_CUTE80.pkl" # VITSTR
     accKeys = []
 
     with open(pkl_filename, 'rb') as f:
@@ -213,7 +213,7 @@ def acquireAttribution(opt, super_model, input, segmTensor, gtClassNum, lowestAc
 ### pklFile - you need to pass pkl file here
 def acquire_bestacc_attr(opt, pickleFile):
     # pickleFile = "metrics_sensitivity_eval_results_IIIT5k_3000.pkl"
-    # pickleFile = "/home/goo/str/str_vit_dataexplain_lambda/shapley_singlechar_ave_matrn_SVT.pkl"
+    # pickleFile = "shapley_singlechar_ave_matrn_SVT.pkl"
     acquireSelectivity = True # If True, set to
     acquireInfidelity = False
     acquireSensitivity = False
@@ -262,7 +262,7 @@ def saveAttrData(filename, attribution, segmData, origImg):
 ### New code (8/3/2022) to acquire average selectivity, infidelity, etc. after running captum test
 def acquire_average_auc(opt):
     # pickleFile = "metrics_sensitivity_eval_results_IIIT5k_3000.pkl"
-    pickleFile = "/home/goo/str/str_vit_dataexplain_lambda/shapley_singlechar_ave_vitstr_IC03_860.pkl"
+    pickleFile = "shapley_singlechar_ave_vitstr_IC03_860.pkl"
     acquireSelectivity = True # If True, set to
     acquireInfidelity = False
     acquireSensitivity = False
@@ -298,7 +298,7 @@ def acquireListOfAveAUC(opt):
     totalChars = 10
     collectedMetricDict = {}
     for charNum in range(0, totalChars):
-        pickleFile = f"/home/goo/str/str_vit_dataexplain_lambda/singlechar{charNum}_results_{totalChars}chardataset.pkl"
+        pickleFile = f"singlechar{charNum}_results_{totalChars}chardataset.pkl"
         with open(pickleFile, 'rb') as f:
             data = pickle.load(f)
         metricDict = {} # Keys: "saliency_acc", "saliency_conf", "saliency_infid", "saliency_sens"

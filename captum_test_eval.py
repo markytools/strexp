@@ -43,7 +43,7 @@ def acquire_average_auc():
 def sumOfAllAttributions():
     modelName = "trba"
     datasetName = "IC15_1811" # IIIT5k_3000, IC03_867, IC13_857, IC15_1811
-    mainRootDir = "/data/goo/strattr/"
+    mainRootDir = ""
     rootDir = f"{mainRootDir}attributionData/{modelName}/{datasetName}/"
     numpyOutputDir = mainRootDir
 
@@ -76,7 +76,7 @@ def sumOfAllAttributions():
     for path, subdirs, files in os.walk(rootDir):
         for name in files:
             fullfilename = os.path.join(rootDir, name) # Value
-            # fullfilename: /data/goo/strattr/attributionData/trba/CUTE80/66_featablt.pkl
+            # fullfilename: attributionData/trba/CUTE80/66_featablt.pkl
             if "_gl." not in fullfilename.split('/')[-1]: # Accept only global+local
                 continue
             totalImgCount += 1
@@ -89,7 +89,7 @@ def sumOfAllAttributions():
     for path, subdirs, files in os.walk(rootDir):
         for name in files:
             fullfilename = os.path.join(rootDir, name) # Value
-            # fullfilename: /data/goo/strattr/attributionData/trba/CUTE80/66_featablt.pkl
+            # fullfilename: attributionData/trba/CUTE80/66_featablt.pkl
             if "_gl." not in fullfilename.split('/')[-1]: # Accept only global+local
                 continue
             print("fullfilename: ", fullfilename)

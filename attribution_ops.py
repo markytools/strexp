@@ -11,8 +11,8 @@ def attr_one_dataset():
     modelName = "vitstr"
     datasetName = "IIIT5k_3000"
 
-    rootDir = f"/data/goo/strattr/attributionData/{modelName}/{datasetName}/"
-    attrOutputImgs = f"/data/goo/strattr/attributionDataImgs/{modelName}/{datasetName}/"
+    rootDir = f"attributionData/{modelName}/{datasetName}/"
+    attrOutputImgs = f"attributionDataImgs/{modelName}/{datasetName}/"
     if not os.path.exists(attrOutputImgs):
         os.makedirs(attrOutputImgs)
 
@@ -22,7 +22,7 @@ def attr_one_dataset():
     for path, subdirs, files in os.walk(rootDir):
         for name in files:
             fullfilename = os.path.join(rootDir, name) # Value
-            # fullfilename: /data/goo/strattr/attributionData/trba/CUTE80/66_featablt.pkl
+            # fullfilename: strattr/attributionData/trba/CUTE80/66_featablt.pkl
             partfilename = fullfilename[fullfilename.rfind('/')+1:]
             print("fullfilename: ", fullfilename)
             imgNum = int(partfilename.split('_')[0])
@@ -51,8 +51,8 @@ def attr_all_dataset():
     datasetNameList = ['IIIT5k_3000', 'SVT', 'IC03_860', 'IC03_867', 'IC13_857', 'IC13_1015', 'IC15_1811', 'IC15_2077', 'SVTP', 'CUTE80']
 
     for datasetName in datasetNameList:
-        rootDir = f"/data/goo/strattr/attributionData/{modelName}/{datasetName}/"
-        attrOutputImgs = f"/data/goo/strattr/attributionDataImgs/{modelName}/{datasetName}/"
+        rootDir = f"attributionData/{modelName}/{datasetName}/"
+        attrOutputImgs = f"attributionDataImgs/{modelName}/{datasetName}/"
         if not os.path.exists(attrOutputImgs):
             os.makedirs(attrOutputImgs)
 
@@ -62,7 +62,7 @@ def attr_all_dataset():
         for path, subdirs, files in os.walk(rootDir):
             for name in files:
                 fullfilename = os.path.join(rootDir, name) # Value
-                # fullfilename: /data/goo/strattr/attributionData/trba/CUTE80/66_featablt.pkl
+                # fullfilename: attributionData/trba/CUTE80/66_featablt.pkl
                 partfilename = fullfilename[fullfilename.rfind('/')+1:]
                 imgNum = int(partfilename.split('_')[0])
                 attrImgName = partfilename.replace('.pkl', '.png')
