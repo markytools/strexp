@@ -71,34 +71,15 @@ CUDA_VISIBLE_DEVICES=0 python captum_improve_abinet.py --config=configs/train_ab
 CUDA_VISIBLE_DEVICES=0 python captum_improve_matrn.py --imgH 32 --imgW 128 --checkpoint=pretrained/matrn.pth --scorer mean --rgb
 ```
 
-## Run in PyTorch
-
-* Run Network Dissection in PyTorch. Please install [PyTorch](http://pytorch.org/) and [Torchvision](https://github.com/pytorch/vision) first. We provide a [feature extract wrapper](src/netprobe_pytorch.py) for PyTorch. So you could run ```script/rundissect_pytorch.sh``` to probe the existing networks trained on ImageNet in [Torchvision](https://github.com/pytorch/vision/tree/master/torchvision/models).     
-
-```
-    script/rundissect_pytorch.sh
-```
-
-* Or try ```script/rundissect_pytorch_external.sh``` on a resnet18 trained on [Places365](https://github.com/CSAILVision/places365).
-
-```
-    script/rundissect_pytorch_external.sh
-```
-
-## Report
-* At the end of the dissection script, a report will be generated that summarizes the semantics of the networks.  For example, after you have tested the conv5 layer of caffe_reference_places365, you will have:
-
-```
-    dissection/caffe_reference_places365/html/conv5.html
-    dissection/caffe_reference_places365/html/image/conv5-bargraph.svg
-    dissection/caffe_reference_places365/html/image/conv5-0[###].png    
-    dissection/caffe_reference_places365/conv5-result.csv
-```
-
-These are, respectively, the HTML-formatted report, the semantics of the units of the layer summarized as a bar graph, visualizations of all the units of the layer (using zero-indexed unit numbers), and a CSV file containing raw scores of the top matching semantic concepts in each category for each unit of the layer.
-
-* Dissect results of all the existing networks in mat format. After the csv file containing the raw data of the unit semantics is generated, you could use the sample scripts in ```plot/extract_csv.m``` to plot the figure. ```plot/semantics_cvpr_release.mat``` contains the semantics of all the networks analyzed in the CVPR paper. It will generate a [figure](plot/semantics_allnetwork.pdf) showing the number of unique detectors across different networks.
-
+## Experiments
+![alt text](https://github.com/markytools/strexp/blob/master/data/VITSTR_PARSeq_TRBA_SRN_ABINET_MATRN.png?raw=true)</br>
+From top to bottom: VITSTR(1st & 2nd figure), PARSeq(3rd & 4th figure), TRBA(5th & 6th figure), SRN(7th & 8th figure), ABINET(9th & 10th figure) and MATRN(11th & 12th figure) quantitative results.
+</br>
+</br>
+![alt text](https://github.com/markytools/strexp/blob/master/data/parseq_srn_trba.png?raw=true)</br>
+From top to bottom: PARSeq(1st & 2nd figure), SRN(3rd & 4th figure), and TRBA(5th & 6th figure) qualitative results.
+</br>
+</br>
 
 ## Reference 
 If you find the codes useful, please cite this paper
