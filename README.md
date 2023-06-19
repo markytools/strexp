@@ -75,6 +75,7 @@ CUDA_VISIBLE_DEVICES=0 python captum_improve_matrn.py --imgH 32 --imgW 128 --che
 
 * After running the experiments above, you will have an output pickle file in the current directory. The name of this pickle file can be found in the variable "outputSelectivityPkl", which is written just below the "acquireSingleCharAttrAve()" function. For example in captum_improve_vitstr.py, you can see the variable "outputSelectivityPkl" in line 194.
 * In order to acquire the selectivity AUC, you need to replace the pickle file in captum_test.py to the output pickle filename. After this, uncomment the line 670 in captum_improve_vitstr.py (comment out line 671 too) and run the same code above to produce the metrics of STRExp evaluated on VITSTR.
+* Repeat this step for all other captum_improve pyfiles.
 
 
 ## Experiments
