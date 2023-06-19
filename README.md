@@ -1,20 +1,6 @@
 # Scene Text Recognition Explainability (STRExp)
 
- **We release a framework that attemps to merge Explainable AI (XAI) into Scene Text Recognition (STR). Light and portable version of Network Dissection in pyTorch at [NetDissect-Lite](https://github.com/CSAILVision/NetDissect-Lite). It is much faster      than this first version and the code structure is cleaned up, without any complex shell commands. It takes about 30 min for a resnet18 model and 2 hours for a          densenet161. If you have questions, please open issues at NetDissect-Lite**
- 
-## Introduction
-This repository contains the demo code for the [CVPR'17 paper](http://netdissect.csail.mit.edu/final-network-dissection.pdf) Network Dissection: Quantifying Interpretability of Deep Visual Representations. You can use this code with naive [Caffe](https://github.com/BVLC/caffe), with matcaffe and pycaffe compiled. We also provide a [PyTorch wrapper](script/rundissect_pytorch.sh) to apply NetDissect to probe networks in PyTorch format. There are dissection results for several networks at the [project page](http://netdissect.csail.mit.edu/).
-
-This code includes
-
-* Code to run network dissection on an arbitrary deep convolutional
-    neural network provided as a Caffe deploy.prototxt and .caffemodel.
-    The script `rundissect.sh` runs all the needed phases.
-
-* Code to create the merged Broden dataset from constituent datasets
-    ADE, PASCAL, PASCAL Parts, PASCAL Context, OpenSurfaces, and DTD.
-    The script `makebroden.sh` runs all the needed steps.
-
+ **We release a framework that attemps to merge Explainable AI (XAI) into Scene Text Recognition (STR). This tool builds on the captum library and applies explainability to existing Scene Text Recognition models by leveraging their local explanations.**
 
 ## Download
 * Pretrained STR models. After unzipping, simply put the "pretrained/" folder into the cloned strexp directory.
