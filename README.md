@@ -77,10 +77,11 @@ From top to bottom: PARSeq(1st & 2nd figure), SRN(3rd & 4th figure), and TRBA(5t
 ## Reference 
 If you find the codes useful, please cite this paper
 ```
-@inproceedings{netdissect2017,
-  title={Network Dissection: Quantifying Interpretability of Deep Visual Representations},
-  author={Bau, David and Zhou, Bolei and Khosla, Aditya and Oliva, Aude and Torralba, Antonio},
-  booktitle={Computer Vision and Pattern Recognition},
-  year={2017}
+@inproceedings{ty2023scene,
+  title={Scene Text Recognition Models Explainability using Local Features},
+  author={Ty, Mark Vincent and Atienza, Rowel},
+  booktitle={International Conference on Image Processing (ICIP)},
+  year={2023},
+  organization={IEEE}
 }
 ```
