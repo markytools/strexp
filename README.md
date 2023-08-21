@@ -75,6 +75,8 @@ From top to bottom: PARSeq(1st & 2nd figure), SRN(3rd & 4th figure), and TRBA(5t
 </br>
 
 ## Reference 
+
+Full thesis manuscript: https://drive.google.com/file/d/1KBFXfjZL6Gf4HYU5cw5nWylU93gCPLlv/view?usp=sharing
 If you find the codes useful, please cite this paper
 ```
 @inproceedings{ty2023scene,
