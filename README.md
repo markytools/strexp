@@ -81,9 +81,10 @@ Full thesis manuscript: https://drive.google.com/file/d/1KBFXfjZL6Gf4HYU5cw5nWyl
 If you find the codes useful, please cite this paper
 ```
 @inproceedings{ty2023scene,
-  title={Scene Text Recognition Models Explainability using Local Features},
+  title={Scene Text Recognition Models Explainability Using Local Features},
   author={Ty, Mark Vincent and Atienza, Rowel},
-  booktitle={International Conference on Image Processing (ICIP)},
+  booktitle={2023 IEEE International Conference on Image Processing (ICIP)},
+  pages={645--649},
   year={2023},
   organization={IEEE}
 }
