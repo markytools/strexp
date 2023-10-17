@@ -1,6 +1,18 @@
-# Scene Text Recognition Explainability (STRExp)
+<div align="center">
 
- **We release a framework that attemps to merge Explainable AI (XAI) into Scene Text Recognition (STR). This tool builds on the captum library and applies explainability to existing Scene Text Recognition models by leveraging their local explanations.**
+# <br> Scene Text Recognition Models Explainability Using Local Features (STRExp) </br>
+
+[![arXiv preprint](http://img.shields.io/badge/arXiv-2310.09549-b31b1b)](https://arxiv.org/abs/2310.09549)
+[![In Proc. ICIP 2023](http://img.shields.io/badge/ICIP-2023-10222406)](https://ieeexplore.ieee.org/abstract/document/10222406)
+
+[**Mark Vincent Ty**](https://github.com/markytools) and [**Rowel Atienza**](https://github.com/roatienza)
+
+Electrical and Electronics Engineering Institute </br>
+University of the Philippines, Diliman
+
+</div>
+
+ **We release a framework that merges Explainable AI (XAI) into Scene Text Recognition (STR). This tool builds on the captum library and applies explainability to existing Scene Text Recognition models by leveraging their local explanations.**
 
 ## Download
 * Pretrained STR models. After unzipping, simply put the "pretrained/" folder into the cloned strexp directory.
