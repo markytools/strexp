@@ -86,9 +86,6 @@ From top to bottom: PARSeq(1st & 2nd figure), SRN(3rd & 4th figure), and TRBA(5t
 </br>
 </br>
 
-## Huggingface Application
-STRExp available on Huggingface Spaces: https://huggingface.co/spaces/markytools/strexp
-
 ## Reference 
 
 Full thesis manuscript: https://drive.google.com/file/d/1KBFXfjZL6Gf4HYU5cw5nWylU93gCPLlv/view?usp=sharing
